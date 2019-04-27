@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="css/base.css" />
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script>
+    window.addEventListener("load", init);
+    function init() {
+      var stage = new createjs.Stage("myCanvas");
+      // 円のシェイプを作成
+      var circle = new createjs.Shape();
+      circle.graphics.beginFill("DarkRed").drawCircle(0, 0, 50);
+      circle.x = 400;
+      circle.y = 0;
+      stage.addChild(circle);
+      createjs.Tween.get(circle) // ターゲットを指定
+              .to({y: 490}, 2000, createjs.Ease.bounceOut);
+      // ステージを更新する
+      createjs.Ticker.addEventListener("tick", handleTick);
+      function handleTick() {
+        stage.update();
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="myCanvas" width="960" height="540"></canvas>
+</body>
+</html>
