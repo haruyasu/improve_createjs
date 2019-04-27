@@ -6,23 +6,77 @@
     window.addEventListener("load", init);
 
     function init() {
-      // Stageオブジェクトを作成します
-      var stage = new createjs.Stage("myCanvas");
+        // Stageオブジェクトを作成します
+        var stage = new createjs.Stage("myCanvas");
 
-      // 円を作成します
-      var shape = new createjs.Shape();
-      shape.graphics.beginFill("DarkRed"); // 赤色で描画するように設定
-      shape.graphics.drawCircle(0, 0, 100); //半径 100px の円を描画
-      shape.x = 200; // X 座標 200px の位置に配置
-      shape.y = 200; // Y 座標 200px の位置に配置
-      stage.addChild(shape); // 表示リストに追加
+        // 円を作成します
+        var shape = new createjs.Shape();
+        shape.graphics.beginFill("DarkRed"); // 赤色で描画するように設定
+        shape.graphics.drawCircle(0, 0, 100); //半径 100px の円を描画
+        shape.x = 200; // X 座標 200px の位置に配置
+        shape.y = 200; // Y 座標 200px の位置に配置
 
-      // Stageの描画を更新します
-      stage.update();
+        var shape = new createjs.Shape();
+        // 赤い円
+        shape.graphics.beginFill("red");
+        shape.graphics.drawCircle(100, 100, 50);
+        // 緑の円
+        shape.graphics.beginFill("green");
+        shape.graphics.drawCircle(200, 100, 50);
+        // 青い円
+        shape.graphics.beginFill("blue");
+        shape.graphics.drawCircle(300, 100, 50);
+
+        shape.graphics.beginFill("DarkRed"); // 赤色で描画するように設定
+        shape.graphics.drawRect(0, 0, 200, 100); // 長方形を描画
+
+        shape.graphics.beginFill("DarkRed"); // 赤色で描画するように設定
+        shape.graphics.drawPolyStar(0, 0, 75, 5, 0.6, -90); //75pxの星を記述
+        // stage.addChild(shape); // 表示リストに追加
+
+        var t = new createjs.Text("Hello World!", "100px serif", "DarkRed");
+        t.textAlign = "left";
+        // stage.addChild(t);
+
+        var bmp = new createjs.Bitmap("sample.png");
+        // stage.addChild(bmp);
+        bmp.regX = 100;
+        bmp.regY = 100;
+
+        // Stageの作成
+        var stage = new createjs.Stage("myCanvas");
+
+        // コンテナー(グループの親)を作成
+        var container = new createjs.Container();
+        container.x = 300;
+        container.y = 300;
+        stage.addChild(container); // 画面に追加
+
+        // ループ分で10回
+        for (var i = 0; i < 10; i++) {
+            // 円を作成し
+            var ball = new createjs.Shape();
+            ball.graphics
+                    .beginFill("DarkRed")
+                    .drawCircle(0, 0, 50);
+            // 円周上に配置
+            ball.x = 200 * Math.sin(i * 360 / 10 * Math.PI / 180);
+            ball.y = 200 * Math.cos(i * 360 / 10 * Math.PI / 180);
+            // グループに追加
+            container.addChild(ball);
+        }
+
+
+
+
+
+
+        // Stageの描画を更新します
+        stage.update();
     }
   </script>
 </head>
 <body>
-  <canvas id="myCanvas" width="640" height="320"></canvas>
+  <canvas id="myCanvas" width="1000" height="1000"></canvas>
 </body>
 </html>
